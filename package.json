@@ -1,7 +1,7 @@
 {
   "name": "sidetech-proxy",
   "version": "1.0",
-  "description": "Discord webhook proxy system for public usage.",
+  "description": "Proxy system built for public use, offering fast, secure, and easy-to-use access.",
   "main": "runner.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
