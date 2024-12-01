@@ -6,4 +6,4 @@ app.use(express.json());
 
 app.use("/", require("./gateway/discord/webhooks/post"));
 
-app.listen(87922, () => console.log(`✅ | :: System - (Proxy) :: | Service is online!`));
+app.listen(8792, () => console.log(`✅ | :: System - (Proxy) :: | Service is online!`));
