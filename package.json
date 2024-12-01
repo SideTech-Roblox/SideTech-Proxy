@@ -1,0 +1,24 @@
+{
+  "name": "sidetech-proxy",
+  "version": "1.0",
+  "description": "Discord webhook proxy system for public usage.",
+  "main": "runner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SideTech-Roblox/SideTech-Proxy.git"
+  },
+  "author": "SideTech",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/SideTech-Roblox/SideTech-Proxy/issues"
+  },
+  "homepage": "https://github.com/SideTech-Roblox/SideTech-Proxy#readme",
+  "dependencies": {
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "mongodb": "^6.10.0"
+  }
+}
