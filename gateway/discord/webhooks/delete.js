@@ -13,13 +13,13 @@ const RateLimiter = rateLimit({
     legacyHeaders: false,
 });
 
-router.post('/discord/webhooks/:id/:token', RateLimiter, async (req, res) => {
+router.delete('/discord/webhooks/:id/:token/messages/:messageid', RateLimiter, async (req, res) => {
     try {
         const queryParams = new URLSearchParams(req.query).toString();
-        const discordApiUrl = `https://discord.com/api/webhooks/${req.params.id}/${req.params.token}${queryParams ? `?${queryParams}` : ''}`;
+        const discordApiUrl = `https://discord.com/api/webhooks/${req.params.id}/${req.params.token}/messages/${req.params.messageid}${queryParams ? `?${queryParams}` : ''}`;
 
         const discordOptions = {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },

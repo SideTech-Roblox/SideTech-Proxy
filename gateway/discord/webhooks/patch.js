@@ -13,13 +13,13 @@ const RateLimiter = rateLimit({
     legacyHeaders: false,
 });
 
-router.post('/discord/webhooks/:id/:token', RateLimiter, async (req, res) => {
+router.patch('/discord/webhooks/:id/:token/messages/:messageid', RateLimiter, async (req, res) => {
     try {
         const queryParams = new URLSearchParams(req.query).toString();
-        const discordApiUrl = `https://discord.com/api/webhooks/${req.params.id}/${req.params.token}${queryParams ? `?${queryParams}` : ''}`;
+        const discordApiUrl = `https://discord.com/api/webhooks/${req.params.id}/${req.params.token}/messages/${req.params.messageid}${queryParams ? `?${queryParams}` : ''}`;
 
         const discordOptions = {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -28,17 +28,13 @@ router.post('/discord/webhooks/:id/:token', RateLimiter, async (req, res) => {
 
         const response = await fetch(discordApiUrl, discordOptions);
 
-        let responseData = null;
-
-        if (response.status !== 204 && response.headers.get('content-type')?.includes('application/json')) {
-            responseData = await response.json();
-        }
+        const responseData = await response.json();
 
         if (response.ok) {
             await Stats.updateOne({ "_id": 'Proxy' }, { $inc: { "requests.discord": 1 } });
-            return res.status(response.status).json(responseData || {});
+            return res.status(response.status).json(responseData);
         } else {
-            return res.status(response.status).json(responseData || { status: response.status, message: 'Discord API error' });
+            return res.status(response.status).json(responseData);
         }
     } catch (error) {
         console.error(error);
